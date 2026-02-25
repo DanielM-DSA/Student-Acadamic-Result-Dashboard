@@ -1,0 +1,49 @@
+{% if error %}
+  <p style="color:red;">{{ error }}</p>
+{% endif %}
+{% extends "base.html" %}
+{% block content %}
+<h2>Add Student</h2>
+
+<form method="POST">
+  <p>Name: <input name="name" required></p>
+  <p>Roll No: <input name="roll_no" required></p>
+  <p>Department: <input name="department" required></p>
+  <p>Semester: <input name="semester" required></p>
+
+  <hr>
+  <h3>Subjects</h3>
+
+  <div id="subjects">
+    <div class="row">
+      <p>Code: <input name="subject_code[]" required></p>
+      <p>Name: <input name="subject_name[]" required></p>
+      <p>Attendance %: <input type="number" name="attendance[]" min="0" max="100" required></p>
+      <p>Internal: <input type="number" name="internal_marks[]" min="0" max="100" required></p>
+      <p>External: <input type="number" name="external_marks[]" min="0" max="100" required></p>
+      <hr>
+    </div>
+  </div>
+
+  <button type="button" onclick="addRow()">Add Another Subject</button>
+  <br><br>
+  <button type="submit">Save Student</button>
+</form>
+
+<script>
+function addRow() {
+  const box = document.getElementById("subjects");
+  const div = document.createElement("div");
+  div.className = "row";
+  div.innerHTML = `
+    <p>Code: <input name="subject_code[]" required></p>
+    <p>Name: <input name="subject_name[]" required></p>
+    <p>Attendance %: <input type="number" name="attendance[]" min="0" max="100" required></p>
+    <p>Internal: <input type="number" name="internal_marks[]" min="0" max="100" required></p>
+    <p>External: <input type="number" name="external_marks[]" min="0" max="100" required></p>
+    <hr>
+  `;
+  box.appendChild(div);
+}
+</script>
+{% endblock %}

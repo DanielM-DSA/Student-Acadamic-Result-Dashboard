@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>View Marks</h2>
+
+{% if student %}
+<p><b>Name:</b> {{ student["name"] }}</p>
+<p><b>Roll No:</b> {{ student["roll_no"] }}</p>
+<p><b>Department:</b> {{ student["department"] }}</p>
+<p><b>Semester:</b> {{ student["semester"] }}</p>
+<hr>
+{% endif %}
+
+{% if marks and marks|length > 0 %}
+<table border="1" cellpadding="6">
+  <tr>
+    <th>Code</th>
+    <th>Subject</th>
+    <th>Attendance %</th>
+    <th>Internal</th>
+    <th>External</th>
+    <th>Total</th>
+    <th>Grade</th>
+    <th>GP</th>
+    <th>Result</th>
+  </tr>
+  {% for m in marks %}
+  <tr>
+    <td>{{ m["subject_code"] }}</td>
+    <td>{{ m["subject_name"] }}</td>
+    <td>{{ m["attendance"] }}</td>
+    <td>{{ m["internal_marks"] }}</td>
+    <td>{{ m["external_marks"] }}</td>
+    <td>{{ m["total"] }}</td>
+    <td>{{ m["grade"] }}</td>
+    <td>{{ m["grade_point"] }}</td>
+    <td>{{ m["result"] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3>CGPA: {{ cgpa }}</h3>
+{% else %}
+<p>No marks found.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card shadow-sm border-0">
+  <div class="card-body p-4">
+    <h3 class="mb-3">Students</h3>
+
+    {% if students|length == 0 %}
+      <div class="alert alert-warning">No students found.</div>
+    {% else %}
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Roll No</th>
+              <th>Department</th>
+              <th>Semester</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in students %}
+              <tr>
+                <td>{{ s["id"] }}</td>
+                <td class="fw-semibold">{{ s["name"] }}</td>
+                <td>{{ s["roll_no"] }}</td>
+                <td>{{ s["department"] }}</td>
+                <td>{{ s["semester"] }}</td>
+                <td>
+                  <a class="btn btn-sm btn-primary" href="{{ url_for('view_marks', student_id=s['id']) }}">
+                    View Marks
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
